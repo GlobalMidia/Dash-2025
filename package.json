@@ -18,11 +18,12 @@
     "framer-motion": "^10.x",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.x"
+    "react-router-dom": "^6.x",
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
-    "gh-pages": "^6.0.0",
     "autoprefixer": "^10.4.17",
+    "gh-pages": "^6.3.0",
     "parcel": "^2.11.0",
     "postcss": "^8.4.35",
     "process": "^0.11.10",
