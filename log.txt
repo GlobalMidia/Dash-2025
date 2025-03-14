@@ -1,0 +1,129 @@
+## Project Migration Log: Mock Data to Real-Time User Input
+
+**Project Goal:** Transition the project from using mock data (in `mockData.js`) to handling real-time user input and persisting data using local storage.
+
+**Log Document Purpose:** This document serves as an internal record to track all changes made during this migration process. It will help maintain clarity and context as we move forward.
+
+---
+
+### Phase 1: Core Infrastructure and Removal of Mock Data
+
+**Objective:** Set up the foundational elements for local storage and eliminate the reliance on `mockData.js`.
+
+**Changes:**
+
+1.  **File: `c:\Users\User\Dash 2025\src\data\mockData.js`**
+    *   **Action:** Deleted or commented out the entire file content.
+    *   **Reason:** No longer needed; replaced by user-inputted data.
+    *   **Status:** Complete
+
+2.  **File: `c:\Users\User\Dash 2025\src\data\localStorageUtils.js`**
+    *   **Action:**
+        *   Created `dataKeys` object to store keys used in LocalStorage.
+        *   Added `initializeLocalStorage()` function. This will make sure the dataKeys are created on the localStorage if they are not already there.
+        *   Added `setData(key, data)` function. It will allow to save the data in the localstorage.
+        *   Added `getData(key)` function. It will allow to retrieve the data from the localstorage.
+        *   Added `deleteData(key)` function. It will allow to remove data from the localstorage.
+    *   **Reason:** Provide a centralized place for all interactions with local storage and avoid hardcoded data and typos.
+    *   **Status:** Complete
+
+3.  **File: `App.js` (or main application component)**
+    *   **Action:** Imported and called `initializeLocalStorage()` at the start of the application.
+    *   **Reason:** Initialize LocalStorage to prevent errors when keys are not there.
+    *   **Status:** Complete
+
+---
+
+### Phase 2: Adapting Components for User Input and Local Storage
+
+**Objective:** Modify existing components to remove mock data usage, retrieve data from local storage, save data to local storage, and handle user input.
+
+**Changes:**
+
+1.  **File: `c:\Users\User\Dash 2025\src\components\Admin\EmployeeManagement.js`**
+    *   **Action:**
+        *   Removed any reference to `mockData.js`.
+        *   Initialized `employees` state as an empty array (`[]`).
+        *   Added `useEffect` to load `employees` from local storage on mount.
+        *   Added `useEffect` to save `employees` to local storage on changes.
+        * Adapted the code to have full control of the users.
+    *   **Reason:** Manage employee data using user input and local storage.
+    *   **Status:** Complete
+
+2.  **File: `c:\Users\User\Dash 2025\src\components\Admin\TaskManagement.js`**
+    *   **Action:**
+        *   Removed any reference to `mockData.js`.
+        *   Initialized `tasks`, `employees` and `clients` states as empty arrays (`[]`).
+        *   Added `useEffect` to load `tasks`, `employees` and `clients` from local storage on mount.
+        *   Added `useEffect` to save `tasks` to local storage on changes.
+        *   Created `handleChange`, `handleSubmit`, `deleteTask`, `updateTaskStatus`, `getEmployeeName`, `getClientName`, `getPriorityColor`, `getStatusColor` functions.
+        * Adapted the code to have full control of the tasks.
+    *   **Reason:** Manage task data using user input and local storage.
+    *   **Status:** Complete
+
+3.  **File: `c:\Users\User\Dash 2025\src\components\Dashboard\EmployeeTaskGrid.js`**
+    *   **Action:**
+        *   Removed any reference to `mockData.js`.
+        *   Removed input props from the component.
+        *   Initialized `employees`, `tasks` and `clients` states as empty arrays (`[]`).
+        *   Added `useEffect` to load `employees`, `tasks` and `clients` from local storage on mount.
+        *   Updated `getActiveTask` to now get the task by the `employeeId`.
+        * Updated `getClientInfo` to now take in account that the id can be a string.
+    *   **Reason:** Display task information dynamically from local storage.
+    *   **Status:** Complete
+
+4.  **File: `c:\Users\User\Dash 2025\src\components\Admin\PlaybookManagement.js`**
+    *   **Action:**
+        *   Removed any reference to `mockData.js`.
+        *   Initialized `playbooks` state as an empty array (`[]`).
+        *   Added `useEffect` to load `playbooks` from local storage on mount.
+        *   Added `useEffect` to save `playbooks` to local storage on changes.
+        *   Created `handleChange`, `handleTaskChange`, `addTask`, `removeTask`, `startNewPlaybook`, `editPlaybook`, `cancelEdit`, `savePlaybook`, `deletePlaybook` functions.
+        * Adapted the code to have full control of the playbooks.
+        * Removed the duplicate load of the playbooks.
+    *   **Reason:** Manage playbook data using user input and local storage.
+    *   **Status:** Complete
+
+---
+### Phase 3: Client Management
+
+**Objective**: Create the client management component that will allow to manage the clients.
+
+**Changes**:
+
+1. **`c:\Users\User\Dash 2025\src\components\Admin\ClientManagement.js`**
+    *   **Action:**
+        * Created the new file to manage the client.
+        * Added the functions `handleChange`, `handleLogoUpload`, `editClient`, `cancelEdit`, `saveClient`, `deleteClient`, `getPlaybookName`.
+        * Added the `useEffect` hooks to load and save the clients.
+        * Added the `playbooks` state and the load.
+        * Updated the UI.
+    * **Reason:** Now it is possible to see, edit and delete the clients.
+    * **Status:** Complete
+
+2. **`c:\Users\User\Dash 2025\src\components\Admin\ClientOnboarding.js`**
+    * **Action**:
+        * Updated the form to now have the client color field.
+        * Updated the form to now have the client logo.
+    * **Reason**: The form is now complete, and the client color and logo are now managed.
+    * **Status**: Complete
+
+3. **`c:\Users\User\Dash 2025\src\components\Admin\Admin.js`**
+    * **Action**:
+        * Created the client management route in the `Routes`.
+        * Created the `client management` option in the side bar.
+    * **Reason**: Now the client management is accessible.
+    * **Status**: Complete
+
+---
+
+### Phase 4: Future Considerations
+
+*   **Advanced State Management:** If the application grows significantly, consider using a state management library (Redux, Zustand, etc.) for better scalability.
+*   **Error Handling:** Add more comprehensive error handling (e.g., `try...catch` blocks) for local storage operations and other potential errors.
+*   **Data Validation:** Add or improve client-side validation to ensure data integrity.
+*   **Testing**: Thorough testing of all features to make sure everything is working as expected.
+
+---
+
+**Note:** This log will be updated as we continue working on the project.

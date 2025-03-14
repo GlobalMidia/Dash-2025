@@ -1,0 +1,34 @@
+{
+  "name": "dash-2025",
+  "version": "1.0.0",
+  "homepage": "https://GlobalMidia.github.io/Dashinterna",
+  "private": true,
+  "description": "A professional HTML-based dashboard system for tracking employee tasks",
+  "main": "src/index.js",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "date-fns": "^2.x",
+    "framer-motion": "^10.x",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.x"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0",
+    "autoprefixer": "^10.4.17",
+    "parcel": "^2.11.0",
+    "postcss": "^8.4.35",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.1"
+  },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ]
+}
